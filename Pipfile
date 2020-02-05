@@ -6,6 +6,9 @@ verify_ssl = true
 [dev-packages]
 jupyter = "*"
 notebook = "*"
+pylint = "*"
+pycodestyle = "*"
+autopep8 = "*"
 
 [packages]
 
