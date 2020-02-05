@@ -1,6 +1,6 @@
 # This code taken from:
 # "Updated source code for calculating fire danger indices in the
-# canadian forest fire weather index system" : Y. Wang, K.R. Anderson,
+# canadian forest fire weather index system. 2015" : Y. Wang, K.R. Anderson,
 # and R.M. Suddaby.
 # As provided by Natural Resources Canada (NRCan)
 # This reproduction has not been produced in affiliation with,
@@ -161,5 +161,12 @@ class FWICLASS:
             fwi = math.exp(2.72 * (0.434*math.log(bb)) **
                            0.647)                            # *Eq. 30a*#
         return fwi
+
+    def DSRCalc(self, fwi):
+        # This formula NOT taken from the 2015 document.
+        # This formula taken from "Equations and FORTRAN program for the Canadian Forest Fire Weather Index
+        # System. 1985"
+        return 0.0272 * math.pow(fwi, 1.77)
+
 
 # End of class FWI Class

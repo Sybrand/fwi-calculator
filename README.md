@@ -6,6 +6,12 @@ This reproduction is a modified copy of an official work that is published by Na
 
 # Running
 
+## API
+
+```
+pipenv run uvicorn main:app --reload
+```
+
 ## Calculator
 
 If you run:
