@@ -1,3 +1,11 @@
+# This code taken from:
+# "Updated source code for calculating fire danger indices in the
+# canadian forest fire weather index system" : Y. Wang, K.R. Anderson,
+# and R.M. Suddaby.
+# As provided by Natural Resources Canada (NRCan)
+# This reproduction has not been produced in affiliation with,
+# or with the endorsement of, NRCan.
+
 import math
 # Define Class FWI Class first
 

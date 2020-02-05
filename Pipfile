@@ -9,6 +9,7 @@ notebook = "*"
 pylint = "*"
 pycodestyle = "*"
 autopep8 = "*"
+numpy = "*"
 
 [packages]
 
