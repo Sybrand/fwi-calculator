@@ -4,13 +4,14 @@ A quick FWI prototype using "Updated source code for calculating fire danger ind
 
 This reproduction is a modified copy of an official work that is published by Natural Resources Canada (NRCan) and the reproduction has not been produced in affiliation with, or with the endorsement of, NRCan.
 
+# Installing
+
+Using a pipfile, so you should be able to just go
+```
+pipenv install --dev
+```
+
 # Running
-
-## API
-
-```
-pipenv run uvicorn main:app --reload
-```
 
 ## Calculator
 
@@ -55,10 +56,3 @@ jupyter notebook
 
 Select the interpreter, command->shift-p (select the interpreter from pipenv, I had to click on terminal for it to actually load)
 
-```
-pipenv install pylint --dev
-pipenv install pycodestyle --dev
-pipenv install autopep8 --dev
-```
-
-I had to restart VSCode
