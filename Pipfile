@@ -9,12 +9,8 @@ notebook = "*"
 pylint = "*"
 pycodestyle = "*"
 autopep8 = "*"
-numpy = "*"
 
 [packages]
-fastapi = "*"
-uvicorn = "*"
-python-multipart = "*"
 
 [requires]
 python_version = "3.8"

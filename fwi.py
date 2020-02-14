@@ -7,9 +7,9 @@
 # or with the endorsement of, NRCan.
 
 import math
+
+
 # Define Class FWI Class first
-
-
 class FWICLASS:
 
     def __init__(self, temp, rhum, wind, prcp):
@@ -19,31 +19,34 @@ class FWICLASS:
         self.p = prcp
 
     def FFMCcalc(self, ffmc0):
-        # *Eq. 1*#
+        # *Eq. 1* #
         mo = (147.2*(101.0 - ffmc0))/(59.5 + ffmc0)
         if (self.p > 0.5):
-            # *Eq. 2*#
+            # *Eq. 2* #
             rf = self.p - 0.5
             if (mo > 150.0):
+                # *Eq. 3b*#
                 mo = (mo+42.5*rf*math.exp(-100.0/(251.0-mo)) * (1.0 - math.exp(-6.93/rf))) \
                     + (.0015*(mo - 150.0)**2) * \
                     math.sqrt(
-                        rf)                                       # *Eq. 3b*#
+                        rf)
             elif mo <= 150.0:
                 # *Eq. 3a*#
                 mo = mo+42.5*rf*math.exp(-100.0/(251.0-mo)) * \
                     (1.0 - math.exp(-6.93/rf))
             if(mo > 250.0):
                 mo = 250.0
+        # *Eq. 4*#
         ed = .942*(self.h**.679) + (11.0*math.exp((self.h-100.0)/10.0))+0.18*(21.1-self.t) \
-            * (1.0 - 1.0/math.exp(.1150 * self.h))                                         # *Eq. 4*#
+            * (1.0 - 1.0/math.exp(.1150 * self.h))
         if(mo < ed):
+            # *Eq. 5*#
             ew = .618*(self.h**.753) + (10.0*math.exp((self.h-100.0)/10.0)) \
-                + .18*(21.1-self.t)*(1.0 - 1.0/math.exp(.115 * self.h)
-                                     )                    # *Eq. 5*#
+                + .18*(21.1-self.t)*(1.0 - 1.0/math.exp(.115 * self.h))
             if(mo <= ew):
+                # *Eq. 7a*#
                 kl = .424*(1.0-((100.0 - self.h)/100.0)**1.7)+(.0694*math.sqrt(self.w)) \
-                    * (1.0 - ((100.0 - self.h)/100.0)**8)                                  # *Eq. 7a*#
+                    * (1.0 - ((100.0 - self.h)/100.0)**8)
                 # *Eq. 7b*#
                 kw = kl * (.581 * math.exp(.0365 * self.t))
                 # *Eq. 9*#
@@ -53,9 +56,10 @@ class FWICLASS:
         elif(mo == ed):
             m = mo
         elif mo > ed:
+            # *Eq. 6a*#
             kl = .424*(1.0-(self.h/100.0)**1.7)+(.0694*math.sqrt(self.w)) * \
                 (1.0-(self.h/100.0) **
-                 8)                                                    # *Eq. 6a*#
+                 8)
             # *Eq. 6b*#
             kw = kl * (.581*math.exp(.0365*self.t))
             # *Eq. 8*#
@@ -130,8 +134,9 @@ class FWICLASS:
     def ISIcalc(self, ffmc):
         # *Eq. 1*#
         mo = 147.2*(101.0-ffmc) / (59.5+ffmc)
+        # *Eq. 25*#
         ff = 19.115*math.exp(mo*-0.1386) * (1.0+(mo**5.31) /
-                                            49300000.0)                    # *Eq. 25*#
+                                            49300000.0)
         # *Eq. 26*#
         isi = ff * math.exp(0.05039*self.w)
         return isi
@@ -141,8 +146,9 @@ class FWICLASS:
             # *Eq. 27a*#
             bui = (0.8*dc*dmc) / (dmc+0.4*dc)
         else:
+            # *Eq. 27b*
             bui = dmc-(1.0-0.8*dc/(dmc+0.4*dc)) * \
-                (0.92+(0.0114*dmc)**1.7)                  # *Eq. 27b*
+                (0.92+(0.0114*dmc)**1.7)
         if bui < 0.0:
             bui = 0.0
         return bui
@@ -152,14 +158,15 @@ class FWICLASS:
             # *Eq. 28a*#
             bb = 0.1 * isi * (0.626*bui**0.809 + 2.0)
         else:
-            bb = 0.1*isi*(1000.0/(25. + 108.64/math.exp(0.023*bui))
-                          )                      # *Eq. 28b*#
+            # *Eq. 28b*#
+            bb = 0.1*isi*(1000.0/(25. + 108.64/math.exp(0.023*bui)))
         if(bb <= 1.0):
             # *Eq. 30b*#
             fwi = bb
         else:
+            # *Eq. 30a*#
             fwi = math.exp(2.72 * (0.434*math.log(bb)) **
-                           0.647)                            # *Eq. 30a*#
+                           0.647)
         return fwi
 
     def DSRCalc(self, fwi):
